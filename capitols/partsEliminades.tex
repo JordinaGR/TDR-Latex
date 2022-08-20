@@ -1,0 +1,49 @@
+
+Per exemple, tenim un problema que ens demana que ordenem ascendentment una seqüència d'$n$ nombres naturals ($n$ és la quantitat de nombres que cal ordenar). L'entrada consisteix en una seqüència d'$n$ nombres, per això diem que la mida de l'entrada és $n$. En aquest cas un programa que solucioni aquest problema per a $n = 10$ acabarà molt més ràpid que per a $n = 100.000$, ja que és més ràpid ordenar deu números comparats amb cent mil. Per això expressarem l'eficiència temporal en funció de la mida d'entrada que sempre anomenarem $n$. 
+
+Per exemple, si fem dos programes implementant diferents algoritmes per resoldre el problema anterior per a $n = 1.000, n = 10.000, n = 20.000...$ i obtenim les següents dades:
+
+\begin{figure}[h]
+    \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c | c | c | c|} 
+     \hline
+     Mida de l'entrada ($n$) & 1.000 & 10.000 & 20.000 \\ 
+     \hline
+     Temps (s) & 1 & 10 & 20 \\
+     \hline
+    \end{tabular}
+    \end{center}
+    \caption{Algoritme 1}
+    \label{fig:my_label}
+\end{figure}    
+\begin{figure}[h]
+    \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c | c | c | c|} 
+     \hline
+     Mida de l'entrada ($n$) & 1.000 & 10.000 & 20.000 \\ 
+     \hline
+     Temps (s) & 1 & 100 & 400 \\
+     \hline
+    \end{tabular}
+    \end{center}
+    \caption{Algoritme 2}
+    \label{fig:my_label}
+\end{figure}    
+
+Podem veure com el creixement de l'algoritme 1 és més lent que el creixement de l'algoritme 2. El primer algoritme tarda menys en resoldre el problema, i, per tant, si s'ha utilitzat el mateix ordinador podríem dir que el primer algoritme és més eficient. L'algoritme 1 tarda el mateix proporcionalment, si dividim $\displaystyle\frac{n}{1000}$ obtindrem el temps, d'aquesta manera podem predir quan tardara per a qualsevol valor de $n$. En canvi, l'algoritme 2 creix més ràpidament. En aquest cas particular, creix polinomialment i també podem predir el seu comportament. En aquest cas, el temps el podem trobar fent $\displaystyle\frac{n^2}{10^6}$, per això és polinomial.
+
+_______________________________________-
+
+Ara posaré tres exemples per il·lustrar tres complexitats diferents: 
+\begin{enumerate}
+    \item Per exemple, si estàs buscant un llibre en una estanteria, hauràs de comprovar cada llibre fins a trobar el que busques. En el pitjor dels casos el llibre estarà situat l'últim a l'estanteria, i hauràs de comprovar-los tots fins a trobar-lo. Si hi ha $n$ llibres, trobar el teu llibre t'haurà costat $n$ operacions com a màxim. Per tant, l'eficiència temporal d'aquest procediment són $n$ operacions. \newline
+    
+    \item En canvi, si el llibre que estàs buscant saps que és el primer, només hauràs de fer una sola operació per agafar el primer llibre. Doncs, l'eficiència temporal seria 1 operació. Ens és igual quants llibres hi ha, ja que sempre agafarem el primer i sempre farem 1 operació. \newline
+    
+    \item Per últim, estem en un supermercat i tenim una llista de la compra amb $n$ productes. Però abans d'anar a pagar volem comprovar que no ens haguem deixat res. Així que llegim el primer producte de la llista i el busquem a la nostra cistella, després fem el mateix fins a comprovar els $n$ productes. Cada vegada que busquem el producte a la cistella, estem fent $n$ operacions, igual que el primer exemple dels llibres. Però estem fent aquest procés tantes vegades com productes apuntats a la llista ($n$). Així que estem fent $n$ operacions $n$ vegades o $n \cdot n = n^2$ operacions. Per tant, l'eficiència temporal d'aquest procediment seria $n^2$ operacions com a màxim.
+\end{enumerate}
+
+Igual que en la complexitat constant, no ens interessa exactament quantes operacions fa per a una $n$ concreta. El que ens interessa d'aquesta complexitat és que per a $n$ molt grosses el nombre d'operacions incrementa proporcionalment. Volem estudiar el creixement de la complexitat, no casos concrets. Volem predir quant tardarà en acabar l'algoritme basant-nos en la forma com creix respecte la mida de l'entrada. 
+

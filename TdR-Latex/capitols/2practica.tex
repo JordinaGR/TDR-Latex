@@ -1,0 +1,41 @@
+Finalment, he escrit tot aquest treball programant-ho en \LaTeX \space i utilitzant l'editor Overleaf. 
+
+\LaTeX \space és un sistema de composició de textos orientat a l'àmbit científic i matemàtic. No és un processador de textos, sinó que és un llenguatge de programació orientat a la generació de text.
+
+En els processadors de textos s'escriu directament al document, i es pot editar l'estil amb el ratolí o es pot col·locar les imatges directament sobre el document. En canvi, \LaTeX \space és un llenguatge de programació que es basa en etiquetes. Per editar qualsevol aspecte del document cal escriure una etiqueta i per visualitzar el document cal compilar el codi cada vegada. 
+
+Aquest llenguatge de programació és molt utilitzat en àmbits acadèmics de ciències, tecnologia, enginyeria, matemàtiques, física... i també es requereix per segons quines publicacions en revistes científiques, sobretot de matemàtiques i física.
+
+Per exemple, per crear una figura i inserir una imatge, cal escriure el següent:
+\begin{figure}[H]
+    \begin{minted}[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    bgcolor=LightGray,
+    fontsize=\footnotesize,
+    linenos
+    ]{latex}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.15\textwidth]{imatge.png}
+        \caption[Peu de foto.]{Peu de foto. Font: elaboració pròpia.}
+        \label{fig:my_label}
+    \end{figure}
+    
+        \end{minted}
+        \caption[Exemple de codi en \LaTeX.]{Exemple de codi en \LaTeX. Font: elaboració pròpia.}
+        \label{Figura}
+\end{figure}%
+
+La primera línia de la figura 4.1, crea la figura i la situa seguida del text. Després la centra, inclou la imatge basant-se en el directori on està guardada, es determina la mida i el peu de foto.
+
+Igual que en la resta de llenguatges de programació s'han d'incloure biblioteques per a poder tenir més funcionalitats. Per exemple, per determinar l'espaiat, el format dels títols, capçalera i peus de pàgina, per incloure les figures, utilitzar colors... 
+
+En aquest enllaç trobareu tots els fitxers que formen aquest treball: \url{https://github.com/JordinaGR/TdR-Latex} o escanejant el codi QR de la figura 4.2:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.15\textwidth]{capitols/figures/qrcap4.png}
+    \caption[Codi QR que porta a una pàgina web amb el codi del programa.]{Codi QR que porta a una pàgina web amb el codi del programa. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}

@@ -1,0 +1,243 @@
+L'objectiu d'aquest capítol és entendre millor els algoritmes que hem explicat amb una visualització del seu funcionament i implementar-los en un llenguatge de programació per demostrar de forma pràctica les complexitats que hem analitzat al capítol anterior.
+
+\section{Visualització dels algoritmes}
+El programa de la figura 3.1 és una visualització dels algoritmes que hem explicat. Aquest representa gràficament les dades en rectangles proporcionals, i executa un algoritme. Els gràfics s'actualitzen a cada pas de l'algoritme, i d'aquesta manera podem veure perfectament el funcionament de cada un. 
+
+També mesura quant temps tarda cada un en executar-se i guarda les dades en un document .csv. Aquestes dades no ens serveixen per comprovar la complexitat dels algoritmes, ja que els gràfics alenteixen molt el funcionament de cada algoritme. Ja que estan implementats per ser visualitzats, no per ser molt eficients.
+
+Aquest programa l'he fet en Python, ja que és un llenguatge de programació que té bones biblioteques gràfiques.
+
+El programa està en aquest enllaç: \\ \url{https://github.com/JordinaGR/TDR-visualitzacio-algoritmes} o escanejant el codi de la figura 3.1.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.15\textwidth]{capitols/figures/qrviz.png}
+    \caption[Codi QR que porta a una pàgina web amb el codi del programa.]{Codi QR que porta a una pàgina web amb el codi del programa. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+
+He fet un vídeo que mostra el funcionament del programa, es pot trobar en el següent enllaç: \url{https://drive.google.com/file/d/124msWkaHTGWdloKxFPQzvh6XZ1bwt1jO/view?usp=sharing} o escanejant el codi de la figura 3.2.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.15\textwidth]{capitols/figures/15.png}
+    \caption[Codi QR que porta a vídeo amb el funcionament del programa.]{Codi QR que porta a vídeo amb el funcionament del programa. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+
+
+\section{Anàlisi empíric dels algoritmes proposats}
+En aquest apartat implementarem els algoritmes que hem explicat, els executarem per a mides d'entrada diferents i farem un gràfic amb els resultats. Més tard compararem el gràfic que obtinguem amb el gràfic de la complexitat analitzada matemàticament en el capítol 2.
+
+Aquest cop he implementat els algoritmes en C++, ja que és un llenguatge de programació més ràpid que Python. 
+
+El programa en C++ executa l'algoritme i escriu les dades en un document .csv. Després he fet un altre programa en Python per calcular la mitjana del temps que tarden els algoritmes amb la mateixa mida d'entrada utilitzant la biblioteca Pandas, i generar un gràfic amb la biblioteca Matplotlib.
+
+A l'hora d'executar el programa per recollir les mostres per fer els gràfics, m'he assegurat que l'ordinador no estigués fent altres tasques alhora. De manera que el rendiment de l'ordinador sempre sigui el mateix i minimitzar al màxim els factors externs a l'execució del programa.
+
+El programa està en aquest enllaç: \url{https://github.com/JordinaGR/TDR-complexitat-algs} o escanejant el codi de la figura 3.3.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.15\textwidth]{capitols/figures/qralgs_complex.png}
+    \caption[Codi QR que porta a una pàgina web amb el codi del programa]{Codi QR que porta a una pàgina web amb el codi del programa. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+
+\subsubsection{Anàlisi empíric de la cerca lineal}
+He executat aquest algoritme un total de 60.000 vegades. Per evitar errors he executat 20 vegades cada mida d'entrada diferent i he calculat la mitjana. Les mides d'entrada les he augmentat en 20 unitats en el rang de 10 a 60.000.
+
+Després he representat les dades en un gràfic de dispersió, i he obtingut el següent resultat:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{capitols/figures/1.png}
+    \caption[Gràfic de dispersió de la cerca lineal.]{Gràfic de dispersió de la cerca lineal. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+
+Podem veure en el gràfic de la figura 3.4 una certa relació entre les dues variables. No podem trobar una fórmula que determini el comportament d'aquest programa, ja que hi ha molts factors que afecten els resultats (ordinador, compilador, la dada a cercar...). En canvi, el que podem fer és buscar una correlació entre les dues variables.
+
+En el gràfic 3.4 hi ha una correlació lineal, ja que el gràfic s'aproxima a una recta. Aquesta recta la podem trobar programant amb la biblioteca SciPy. I obtenim el gràfic 3.5:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{capitols/figures/2.png}
+    \caption[Gràfic de dispersió de la cerca lineal amb la recta de regressió lineal.]{Gràfic de dispersió de la cerca lineal amb la recta de regressió lineal. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+
+La recta en vermell és la recta que més s'acosta a tots els punts del gràfic. 
+
+En les regressions lineals hi ha un paràmetre $r, \space 0 \leq r \leq 1$ que expressa que tan properes són les mostres de la recta de regressió. Si $r$ és molt propera a 1, la recta s'acostarà més a totes les mostres. En la regressió de la figura 3.5 $r = 0.966$.
+
+Si comparem els resultats teòrics que concloïen que la cerca lineal té complexitat $O(n)$ i tornem a fer un gràfic per comparar els resultats. Podem veure com els dos gràfics són lineals i, per tant, analitzant la cerca lineal de forma matemàtica i empírica hem arribat al mateix resultat.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\centering
+\begin{axis}[xmin=0, xmax=200, ymin=0, ymax=300, axis lines = middle, 
+x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+y label style={at={(axis description cs:-0.1,.5)},rotate=90,anchor=south},
+xlabel={$n$ mida de l'entrada},
+ylabel={nombre d'operacions},
+style={thick}, 
+compat=1.18, width=.45\textwidth, 
+legend pos= south east]
+\addplot[color=vermellpral, domain=0:200]{x};
+\legend{$O(n)$}
+\end{axis}
+\end{tikzpicture}
+    \caption[Gràfic de complexitat lineal.]{Gràfic de complexitat lineal. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+\vspace{-18pt}
+En el gràfic 3.4 podem veure que com més creix la mida de l'entrada, les mostres s'allunyen més de la recta. Això és perquè com més gran és la mida de l'entrada, la dada que busquem $k$ pot prendre més valors diferents. És a dir, el programa pot fer entre 1 i $n$ operacions, i com més gran és $n$ més gran és el rang, i per això tenim resultats molt diferents. 
+
+Per comprovar que això és cert, podem executar les mateixes 60.000 mostres per al mateix algoritme, però sent $k$ l'últim element de la llista en tots els casos. D'aquesta manera hem obtingut els següents gràfics:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{capitols/figures/3.png}
+    \caption[Gràfic de dispersió de la cerca lineal sent $k$ l'últim element.]{Gràfic de dispersió de la cerca lineal sent $k$ l'últim element. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{capitols/figures/4.png}
+    \caption[Gràfic de dispersió de la cerca lineal amb la recta de regressió lineal i sent $k$ l'últim element.]{Gràfic de dispersió de la cerca lineal amb la recta de regressió lineal i sent $k$ l'últim element. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+
+En aquests gràfics podem veure de forma més clara que són lineals. A més, la recta de regressió lineal encaixa perfectament amb les mostres que hem obtingut ($r = 0.9999$). Tanmateix, totes les mostres que s'allunyen de la recta, queden sempre per sobre i mai per sota. Això demostra que quan hi ha hagut algun error, el programa ha tardat més en executar-se i això pot ser degut a factors de programari o maquinari.
+
+Si comparem els pendents de les rectes, la recta de regressió lineal del gràfic de la figura 3.5 té un pendent d'$1.333 \cdot 10^{-9}$ i la recta del gràfic de la figura 3.8 té un pendent de $2.442 \cdot 10^{-9}$. És correcte que el pendent de la recta que hem obtingut en l'algoritme en què hem executat el pitjor cas possible sigui superior que en el cas en què $k$ era aleatori. 
+
+\subsubsection{Anàlisi empírica de la cerca dicotòmica}
+Ja que aquest algoritme és més eficient que el de la cerca lineal, he pogut recopilar més mostres. He executat l'algoritme 150.270 vegades. L'he executat 30 vegades per cada mida d'entrada entre 10 i 50.000 en intervals de 10 unitats i de 2 a 10 en intervals d'una unitat.
+
+\newpage
+Finalment he obtingut els següents gràfics:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{capitols/figures/5.png}
+    \caption[Gràfic de dispersió de la cerca dicotòmica.]{Gràfic de dispersió de la cerca dicotòmica. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{capitols/figures/6.png}
+    \caption[Gràfic de dispersió de la cerca dicotòmica entre l'interval 1 - 10.000.]{Gràfic de dispersió de la cerca dicotòmica entre l'interval 1 - 10.000. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+
+\newpage
+Podem veure que aquests gràfics tenen la mateixa forma que la funció logarítmica.
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}
+\centering
+\begin{axis}[xmin=0, xmax=300, ymin=0, ymax=40, axis lines = middle, 
+x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+y label style={at={(axis description cs:-0.1,.5)},rotate=90,anchor=south},
+xlabel={$n$ mida de l'entrada},
+ylabel={nombre d'operacions},
+style={thick}, 
+compat=1.18, width=.45\textwidth]
+\addplot[color=vermellpral, domain=-2:300, samples=150]{log2(x)};
+\legend{$O(\log_2{n})$}
+\end{axis}
+\end{tikzpicture}
+    \caption[Complexitat logarítmica.]{Complexitat logarítmica. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+
+Si comparem els gràfics de les figures 3.9 i 3.11 podem veure que els dos tenen la mateixa forma. Per tant, hem demostrat de forma pràctica i teòrica que la cerca dicotòmica té complexitat logarítmica.
+
+També podem veure que en aquests gràfics les mostres no s'allunyen tant com en la cerca lineal, així que podem arribar a la conclusió que la posició de $k$ no afecta gaire els resultats, tampoc quan la mida de l'entrada és molt gran.
+
+\subsubsection{Anàlisi empíric de l'ordenació de bombolla}
+Aquest algoritme l'he executat 15.837 vegades. L'he executat 10 vegades per cada mida d'entrada entre 1 i 8.000 en intervals de deu unitats, i 10 vegades entre 8.000 i 10.000 en intervals de 50 unitats.
+
+\newpage
+He obtingut els següents gràfics:
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim={0 0 0 38pt},clip,width=1\textwidth]{capitols/figures/bombollascater2.png}
+    \caption[Gràfic de dispersió de l'ordenació bombolla.]{Gràfic de dispersió de l'ordenació bombolla. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim={0 0 0 40pt},clip,width=1\textwidth]{capitols/figures/bombollascaterline.png}
+    \caption[Gràfic de dispersió de l'ordenació bombolla amb la corba de regressió $f(x) = 6.33 \cdot 10^{-9} x^2 + 1.4 \cdot 10^{-6} x - 0.0008552$.]{Gràfic de dispersió de l'ordenació bombolla amb la corba de regressió $f(x) = 6.33 \cdot 10^{-9} x^2 + 1.4 \cdot 10^{-6} x - 0.0008552$. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+
+Podem veure clarament que la forma que té el gràfic de la figura 3.13 s'assembla molt a la funció quadràtica. A més, encaixa perfectament amb la corba de regressió polinòmica.
+\vspace{18pt}
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}
+\centering
+\begin{axis}[xmin=0, xmax=25, ymin=0, ymax=700, axis lines = middle, 
+x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+y label style={at={(axis description cs:-0.1,.5)},rotate=90,anchor=south},
+xlabel={$n$ mida de l'entrada},
+ylabel={nombre d'operacions},
+style={thick}, 
+compat=1.18, width=.45\textwidth, 
+legend pos=south east]
+\addplot[color=vermellpral, domain=0:25, samples=150]{x^2};
+\legend{$O(n^2)$, $O(2 \cdot n^2)$}
+\end{axis}
+\end{tikzpicture}
+    \caption[Gràfic de complexitat quadràtica.]{Gràfic de complexitat quadràtica. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+
+Per tant, amb l'estudi matemàtic i empíric hem arribat a la mateixa conclusió: l'ordenació bombolla té complexitat quadràtica.
+
+\subsubsection{Anàlisi empíric de l'ordenació per barreja}
+Aquest algoritme l'he executat 54.260 vegades. Ho he fet 10 vegades per cada mida d'entrada d'entre 10 i 30.000 en intervals de 10 unitats, de 30.050 a 100.000 en intervals de 50 unitats i de 100.100 a 200.000 en intervals de 100 unitats. També he reforçat amb més mostres les parts del gràfic que s'allunyaven més de la resta de mostres.
+
+\newpage
+Finalment he obtingut els següents gràfics:
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim={0 0 0 45pt},clip,width=1\textwidth]{capitols/figures/mergescatter.png}
+    \caption[Gràfic de dispersió de l'ordenació per barreja.]{Gràfic de dispersió de l'ordenació per barreja. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+\vspace{-18pt}
+Sembla una recta, així que podem dibuixar al gràfic una recta de regressió:
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim={0 0 0 38pt},clip,width=1\textwidth]{capitols/figures/mergescaterline.png}
+    \caption[Gràfic de dispersió de l'ordenació per barreja amb la recta de regressió lineal.]{Gràfic de dispersió de l'ordenació per barreja amb la recta de regressió lineal. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+Si comparem la recta vermella amb les dades que hem obtingut, podem veure que no acaba d'encaixar.
+
+En l'anàlisi matemàtic hem arribat a la conclusió que aquest algoritme té complexitat $O(n \cdot \log_2{n})$. Així que podem comparar les figures 3.15 i 3.17.
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}
+\centering
+\begin{axis}[xmin=0, xmax=25, ymin=0, ymax=150, axis lines = middle, 
+x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+y label style={at={(axis description cs:-0.1,.5)},rotate=90,anchor=south},
+xlabel={$n$ mida de l'entrada},
+ylabel={nombre d'operacions},
+style={thick}, 
+compat=1.18, width=.45\textwidth, 
+legend style={nodes={scale=0.8, transform shape}},
+legend pos=south east]
+\addplot[color=vermellpral, domain=0:25, samples=150]{x*log2(x)};
+\legend{$O(n \cdot \log_2{n})$}
+\end{axis}
+\end{tikzpicture}
+    \caption[Gràfic de complexitat $O(n \cdot \log_2{n})$.]{Gràfic de complexitat $O(n \cdot \log_2{n})$. Font: elaboració pròpia.}
+    \label{fig:my_label}
+\end{figure}
+
+Podem veure com els gràfics s'assemblen, encara que no tant com en els altres tres algoritmes. 
+
+Sobre la mida d'entrada 80.000 veiem com la funció passa a ser menys acurada comparat amb els valors anteriors. Inicialment, he pensat que hi podria haver un error així que he tornat a executar les mesures i a fer un altre gràfic. En els dos casos he obtingut els mateixos resultats en la mateixa mida d'entrada. No sé explicar per què passa això en aquest punt.

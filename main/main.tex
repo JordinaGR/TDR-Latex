@@ -1,0 +1,170 @@
+\documentclass[12pt, a4paper, oneside]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[catalan]{babel}
+\usepackage{titlesec}
+\usepackage{lipsum}
+\usepackage{setspace}
+\usepackage[Glenn]{fncychap}
+\usepackage[a4paper,left=0.8in,right=0.8in,top=1.2in,bottom=1.2in]{geometry}
+\usepackage{xcolor}
+\usepackage{blindtext}
+\usepackage[skip=13pt]{parskip}
+\usepackage{enumitem}
+\usepackage{minted}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{pdfpages}
+\usepackage{verbatim}
+\usepackage{appendix}
+\usepackage{pgfplots}
+\usepackage{xpatch}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{parskip}
+\usepackage{needspace}
+\usepackage[labelfont=bf]{caption}
+\usepackage{titlesec}
+\usepackage[bottom]{footmisc}
+\usepackage{subfig}
+\usepackage{caption}
+% \usepackage{subcaption}
+\usepackage{diagbox}
+\usepackage{helvet}
+\usepackage{hyperref}
+\usepackage{mdframed}
+
+% \newenvironment{longlisting}{\captionsetup{type=listing}}{}
+\newenvironment{longlisting}{\captionsetup{type=figure}}{}
+
+\hypersetup{
+    colorlinks,
+    linkcolor={black},
+    % citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
+
+\captionsetup{font=footnotesize}
+
+\definecolor{LightGray}{gray}{0.95}
+\setlist{nosep} %espai entre llistes
+\newcommand{\quotes}[1]{``#1''}
+
+%afegeix colors al text r4
+\definecolor{vermellpral}{RGB}{207, 16, 32} % #CF1020
+\definecolor{blau}{RGB}{0, 96, 240}
+\definecolor{taronja}{RGB}{255, 136, 73}
+\definecolor{verd}{RGB}{105, 190, 40}
+
+\renewcommand{\baselinestretch}{1.5} %espaiat 1.5
+
+%canviar colors de les capçaleres dels capitols r3
+\xpatchcmd\DOCH
+  {\mghrulefill}{\color{vermellpral}\mghrulefill}
+  {}{\PatchFailed}
+  \ChTitleVar{\bfseries\Large\rmfamily\scshape\color{black}}
+  \ChNameVar{\bfseries\Large\rmfamily\color{black}}
+\xpatchcmd\DOTIS
+  {\mghrulefill}{\color{vermellpral}\mghrulefill}
+  {}{\PatchFailed}
+
+\title{TdR}
+\author{Jordina Gavaldà Rovira}
+\date{April 2022}
+
+% capçalera
+\pagestyle{fancy}
+%\rhead{\thepage}
+\rhead{}
+\lhead{}
+\chead{\leftmark}
+\cfoot{\thepage}
+\let\HeadRule\headrule
+\renewcommand\headrule{\color{vermellpral}\HeadRule} %color capçalera
+\setlength{\headheight}{15.71667pt}
+
+% change part format for annex
+\titleformat{\part}[display]
+{\normalfont\Large\bfseries}{}{0pt}{\Large\thepart\hskip1em}
+\titleformat{name=\part,numberless}[display]
+{\normalfont\Large\bfseries}{}{0pt}{\Large}
+\titlespacing*{\part}{0pt}{0pt}{0pt}
+\titlespacing*{name=\part,numberless}{0pt}{0pt}{0pt}
+\renewcommand{\thepart}{\arabic{part}}
+\titleclass{\part}{straight}
+
+\newenvironment{example}{%
+\begin{list}{}{%
+\setlength{\leftmargin}{1cm}%
+\setlength{\rightmargin}{1cm}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+\sffamily
+}%
+\item[]}{\end{list}}
+
+\begin{document} %---------------------------------------------
+
+\includepdf[pages={1}]{capitols/figures/coberta3.pdf}
+
+\pagestyle{empty}
+\tableofcontents
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+
+\newpage
+
+\pagestyle{fancy}
+
+\listoffigures
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\markboth{ABSTRACT}{}
+Technology is evolving very rapidly and competition between companies is fierce. They want their devices to be the safest, fastest and most efficient. In order to achieve that, they need very good hardware and software. The programs, procedures and routines that make up the software must be developed very carefully to be as efficient as possible. To further analyze these programs and procedures, we need to study the process they perform without considering the implementation. In other words, we need to study the algorithm they use to solve a particular computational problem.
+
+In this paper we will study what algorithms are and how their time efficiency is analyzed. Then, two search algorithms and two sorting algorithms will be analyzed theoretically and practically and the results obtained will be compared. We will also briefly talk about algorithmic analysis when using nonlinear data structures. Finally, to visualize the algorithms, I have created two programs: one for sorting and searching algorithms and the other for pathfinding algorithms.
+
+\textit{Keywords}: Algorithm, array, BFS, Big O notation, binary search, bubble sort, complexity, DFS, Dijkstra, efficiency, graphs, hardware, input, latex, linear search, merge sort, output, practical analysis, program, running time, searching, software, sorting, theoretical analysis, visualization.
+\newpage
+
+\chapter*{Resumen}
+\addcontentsline{toc}{chapter}{Resumen}
+\markboth{RESUMEN}{}
+La tecnología evoluciona muy rápidamente y hay mucha competencia entre empresas. Quieren que sus dispositivos sean los más seguros, rápidos y eficientes. Para lograrlo, necesitan buen  hardware y software. Los programas, procedimientos y rutinas que componen el software deben desarrollarse para que sean lo más eficientes posible. Para analizar más a fondo estos programas y procedimientos, necesitamos estudiar el proceso que realizan sin considerar la implementación. En otras palabras, necesitamos estudiar el algoritmo que utilizan para resolver un problema computacional particular.
+
+En este trabajo estudiaremos qué son los algoritmos y cómo se analiza su eficiencia temporal. A continuación, analizaremos teórica y prácticamente dos algoritmos de búsqueda y dos algoritmos de orden y se compararán los resultados obtenidos. También hablaremos brevemente sobre el análisis algorítmico en estructuras de datos no lineales. Finalmente, para visualizar los algoritmos, he creado dos programas: uno de algoritmos de orden y búsqueda en una lista y otro de algoritmos de búsqueda del camino más corto en un grafo.
+
+\textit{Palabras clave: } Algoritmo, análisis práctico, análisis teórico, BFS, búsqueda binaria, búsqueda lineal, complejidad, DFS, dijkstra, eficiencia, eficiencia temporal, entrada, grafos, LaTeX, listas, notación de Landau, ordenación burbuja, ordenamiento, ordenamiento por mezcla, programa, salida, visualizaciones.
+
+\chapter*{Introducció}
+\addcontentsline{toc}{chapter}{Introducció}
+\markboth{INTRODUCCIÓ}{}
+\input{capitols/introduccio}
+
+\setcounter{chapter}{0}
+\chapter{Complexitat algorítmica} 
+
+\input{capitols/Teorica}
+
+\chapter{Anàlisi matemàtic}
+\input{capitols/Teorica2}
+
+\chapter{Comprovació empírica}
+\input{capitols/Practica}
+
+\chapter{\LaTeX}
+\input{capitols/2practica}
+
+\chapter{Conclusions}
+\input{capitols/conclusió}
+
+\chapter{Referències}
+\input{capitols/refe}
+
+\chapter{Annex}
+\input{capitols/annex}
+
+\end{document}
